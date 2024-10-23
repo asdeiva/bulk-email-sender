@@ -35,7 +35,7 @@ document.getElementById('sendButton').addEventListener('click', async () => {
     sendingText.innerText = 'Sending...'; // Reset text
 
     try {
-        const response = await fetch('http://localhost:3000/send-emails', {
+        const response = await fetch('https://mailer-service-ucr8.onrender.com/send-emails', {
             method: 'POST',
             body: formData,
         });
