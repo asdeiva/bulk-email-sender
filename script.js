@@ -1,3 +1,15 @@
+const overlay = document.getElementById('overlay');
+const spinner = document.getElementById('spinner');
+const sendingText = document.getElementById('sendingText');
+
+const socket = new WebSocket('ws://localhost:3000'); // Create a WebSocket connection
+
+socket.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+    const { sentCount, totalRecipients } = data;
+    sendingText.innerText = `Sending... ${sentCount} out of ${totalRecipients} emails sent.`;
+};
+
 document.getElementById('sendButton').addEventListener('click', async () => {
     const senderEmail = document.getElementById('senderEmail').value;
     const appPassword = document.getElementById('appPassword').value;
@@ -18,10 +30,9 @@ document.getElementById('sendButton').addEventListener('click', async () => {
     }
 
     // Show overlay and spinner
-    const overlay = document.getElementById('overlay');
-    const spinner = document.getElementById('spinner');
     overlay.style.display = 'flex'; // Change to flex for centering
     spinner.style.display = 'block';
+    sendingText.innerText = 'Sending...'; // Reset text
 
     try {
         const response = await fetch('http://localhost:3000/send-emails', {
@@ -30,13 +41,15 @@ document.getElementById('sendButton').addEventListener('click', async () => {
         });
 
         const result = await response.json();
-        document.getElementById('statusMessage').innerText = result.message;
+        sendingText.innerText = result.message; // Update with success message
 
     } catch (error) {
-        document.getElementById('statusMessage').innerText = 'Error: ' + error.message;
+        sendingText.innerText = 'Error: ' + error.message; // Update with error message
     } finally {
         // Hide overlay and spinner after receiving response
-        overlay.style.display = 'none';
-        spinner.style.display = 'none';
+        setTimeout(() => {
+            overlay.style.display = 'none';
+            spinner.style.display = 'none';
+        }, 4000); // Delay to allow the user to see the final message
     }
 });
