@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulk Email Sender</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Bulk Email Sender</h1>
+        <form id="emailForm">
+            <div class="form-group">
+                <div class="column">
+                    <label for="senderEmail">Sender Email:</label>
+                    <input type="email" id="senderEmail" required />
+                </div>
+                <div class="column">
+                    <label for="appPassword">App Password:</label>
+                    <input type="password" id="appPassword" required />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="emailList">Email Addresses (comma-separated):</label>
+                <textarea id="emailList" rows="5" placeholder="example1@mail.com, example2@mail.com" required></textarea>
+            </div>
+            <div class="form-group">
+                <div class="column">
+                    <label for="emailSubject">Email Subject:</label>
+                    <input type="text" id="emailSubject" required />
+                </div>
+                <div class="column">
+                    <label for="attachments">Attachments:</label>
+                    <input type="file" id="attachments" multiple />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="emailMessage">Message:</label>
+                <textarea id="emailMessage" rows="5" required></textarea>
+            </div>
+            <button type="button" id="sendButton">Send Emails</button>
+            <div id="statusMessage"></div>
+        </form>
+    </div>
+    
+    <!-- Overlay for loader -->
+    <div id="overlay">
+        <div id="sendingText">Sending...</div> <!-- Sending text -->
+        <div id="spinner"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
