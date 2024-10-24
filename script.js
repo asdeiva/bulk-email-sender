@@ -1,8 +1,10 @@
 const overlay = document.getElementById('overlay');
 const spinner = document.getElementById('spinner');
 const sendingText = document.getElementById('sendingText');
+const historyList = document.getElementById('historyList');
 
-const socket = new WebSocket('ws://localhost:3000'); // Create a WebSocket connection
+
+const socket = new WebSocket('ws://mailer-service-ucr8.onrender.com'); // Create a WebSocket connection
 
 socket.onmessage = (event) => {
     const data = JSON.parse(event.data);
@@ -42,6 +44,10 @@ document.getElementById('sendButton').addEventListener('click', async () => {
 
         const result = await response.json();
         sendingText.innerText = result.message; // Update with success message
+        // Update history
+        const historyItem = document.createElement('li');
+        historyItem.innerText = `Mail Sent to: ${emailList}, Subject: ${emailSubject}`;
+        historyList.appendChild(historyItem);
 
     } catch (error) {
         sendingText.innerText = 'Error: ' + error.message; // Update with error message

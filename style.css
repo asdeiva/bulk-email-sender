@@ -10,7 +10,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    /* height: 100vh; */
 }
 
 .container {
@@ -127,4 +127,18 @@ button:hover {
     font-size: 18px;
     color: #3498db; /* Blue color */
     margin-bottom: 10px; /* Space between text and spinner */
+}
+
+.history {
+    margin-top: 20px;
+}
+
+.history ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.history li {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
 }
