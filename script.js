@@ -4,7 +4,7 @@ const sendingText = document.getElementById('sendingText');
 const historyList = document.getElementById('historyList');
 
 
-const socket = new WebSocket('ws://mailer-service-ucr8.onrender.com'); // Create a WebSocket connection
+const socket = new WebSocket('ws://localhost:3000'); // Create a WebSocket connection
 
 socket.onmessage = (event) => {
     const data = JSON.parse(event.data);
